@@ -4,6 +4,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 5000;
 const app = express();
+// ROUTER
+const productRoute = require("./routes/products");
 
 // MIDDLEWARE
 app.use(cors());
@@ -13,10 +15,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
+// PRODUCT API
+app.use("/api/products", productRoute);
 
 mongoose
   .connect(process.env.MONGODB_URI)
