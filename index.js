@@ -6,12 +6,17 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 // MIDDLEWARE
+app.use(cors());
+app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
-app.use(cors());
-app.use(express.json());
+
+// Routes
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
 
 mongoose
   .connect(process.env.MONGODB_URI)
